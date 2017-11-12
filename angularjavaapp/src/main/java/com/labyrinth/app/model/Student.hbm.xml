@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="main.java.com.labyrinth.app.model">
+	<class name="Student" table="student">
+		<id name="StudentID" column="student_ID">
+			<generator class="native" />
+		</id>
+		<property name="FirstMidName" column="first_name" />
+		<property name="LastName" column="last_name" />
+		<property name="EnrollmentDate" column="enrollment_date" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div id="myEditModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="ctrl.resetFlag()"
+					data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit</h4>
+			</div>
+			<div class="modal-body">
+				<form name="modelItemForm" role="form">
+					<div class="form-group" ng-repeat="item in ctrl.sample.columns">
+						<label for="{{item.columnName}}">{{item.columnName}}</label> <input
+							type="{{item.data.inputType}}" class="form-control"
+							ng-model="ctrl.model[item.columnName]" id="fname" required />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="alert alert-success fade in ng-hide"
+					ng-show="ctrl.showCreateAlert">Updated successfully !</div>
+				<button type="button" class="btn btn-warning"
+					ng-disabled="modelItemForm.$invalid"
+					ng-click="ctrl.editModelItem(ctrl.PrimaryKey,ctrl.model)">Save</button>
+				<button type="button" class="btn btn-default"
+					ng-click="ctrl.resetFlag()" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

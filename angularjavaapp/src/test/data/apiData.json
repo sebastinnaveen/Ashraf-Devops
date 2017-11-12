@@ -1,0 +1,38 @@
+{
+	"student": 
+	{
+		"primaryKey": "studentID",
+		"headerColumn": "firstMidName",
+		"columns": 
+		[
+			{
+				"columnName": "firstMidName",
+				"data": 
+				{
+					"inputType": "text",
+					"required": "true",
+					"placeholder": "Enter First Name"
+				}
+			},
+
+			{
+				"columnName": "lastName",
+				"data": 
+				{
+					"inputType": "text",
+					"required": "true",
+					"placeholder": "Enter Last Name"
+				}
+			},
+
+			{
+				"columnName": "enrollmentDate",
+				"data": 
+				{
+					"inputType": "date",
+					"required": "true"
+				}
+			}
+		]
+	}
+}
