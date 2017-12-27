@@ -33,11 +33,20 @@ buildnumber  = "${currentBuild.number}"
                 
                 sh 'ls -lrth' 
                 sh 'cd angularjavaapp; mvn clean install'
-                sh 'cp angularjavaapp/target/AngularJavaApp.war /opt/'
             
 }
 
         }
+
+stage('copy artifacts'){
+
+agent{ label 'master' }
+
+steps{
+sh 'cp /var/lib/jenkins/workspace/jenkins.test3@2/angularjavaapp/target/AngularJavaApp.war /usr/local/tomcat/webapps/AngularJavaApp.war'
+}
+
+}
 
        
    stage('deployment'){
@@ -48,13 +57,6 @@ buildnumber  = "${currentBuild.number}"
               label 'master'
               args '-v /usr/local/tomcat/webapps:/usr/local/tomcat/webapps:rw -p 8080:8080'    
 }
-}
-
-steps{
-
- sh 'cp /opt/AngularJavaApp.war /usr/local/tomcat/webapps/'
-
-
 }
 
                 
