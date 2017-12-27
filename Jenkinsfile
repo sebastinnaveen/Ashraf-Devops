@@ -1,17 +1,6 @@
 #!groovy
 pipeline {
     agent {label 'master'}
-environment 
-{
-        
-imagename = 'adilashraf_10615395_img'
-        
-containername = 'adilashraf_10615395_con'
-        
-storagepath = "example-repo-local/adilashraf_10615395"      
-buildnumber  = "${currentBuild.number}"
-    
-}
     stages {
         stage('build') {
 
@@ -48,22 +37,19 @@ sh 'cp /var/lib/jenkins/workspace/jenkins.test3@2/angularjavaapp/target/AngularJ
 
 }
 
+
+
        
    stage('deployment'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker run -it -v /usr/local/tomcat/webapps/:/usr/local/tomcat/webapps/:rw -p 8080:8080 -d tomcat:7-jre7
+}
+
                    
-	agent {
-           docker{
-              image 'tomcat:8.0.20-jre8'
-              label 'master'
-              args '-v /usr/local/tomcat/webapps:/usr/local/tomcat/webapps:rw -p 8080:8080'    
-}
 }
 
-                
-    
-
-				
-
-    }
 }
 }
