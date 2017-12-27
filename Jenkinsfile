@@ -29,7 +29,8 @@ buildnumber  = "${currentBuild.number}"
             
 } 
             steps {
-                dir("angularjavaapp/"){ 
+                dir("angularjavaapp/"){
+                sh 'ls -lrth' 
                 sh 'mvn clean install'
             }
 }
