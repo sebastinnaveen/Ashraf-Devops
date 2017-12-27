@@ -33,7 +33,7 @@ buildnumber  = "${currentBuild.number}"
                 
                 sh 'ls -lrth' 
                 sh 'cd angularjavaapp; mvn clean install'
-                sh 'cp angularjavaapp/target/AngularJavaApp.war /opt/
+                sh 'cp angularjavaapp/target/AngularJavaApp.war /opt/'
             
 }
 
