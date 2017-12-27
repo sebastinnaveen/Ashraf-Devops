@@ -45,7 +45,7 @@ sh 'cp /var/lib/jenkins/workspace/jenkins.test3@2/angularjavaapp/target/AngularJ
 agent{ label 'master' }
 
 steps{
-sh 'docker run -it -v /usr/local/tomcat/webapps/:/usr/local/tomcat/webapps/:rw -p 8080:8080 -d tomcat:7-jre7
+sh 'docker run -it -v /usr/local/tomcat/webapps/:/usr/local/tomcat/webapps/:rw -p 8080:8080 -d tomcat:7-jre7'
 }
 
                    
