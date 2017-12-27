@@ -28,14 +28,14 @@ buildnumber  = "${currentBuild.number}"
 } 
             
 } 
-dir("angularjavaapp"){
+
             steps {
                 
                 sh 'ls -lrth' 
-                sh 'mvn clean install'
+                sh 'cd angularjavaapp; mvn clean install'
             
 }
-}
+
 			post { 
                 always { 
                         junit 'target/surefire-reports/*.xml'
