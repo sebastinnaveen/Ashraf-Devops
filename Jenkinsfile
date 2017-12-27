@@ -29,9 +29,10 @@ buildnumber  = "${currentBuild.number}"
             
 } 
             steps {
-                echo 'Hello, Maven'
+                dir("angularjavaapp/"){ 
                 sh 'mvn clean install'
             }
+}
 			post { 
                 always { 
                         junit 'target/surefire-reports/*.xml'
@@ -39,6 +40,7 @@ buildnumber  = "${currentBuild.number}"
             }
 
         }
+
         stage('sonat test') {
             agent { docker {
                
