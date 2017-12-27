@@ -36,37 +36,10 @@ buildnumber  = "${currentBuild.number}"
             
 }
 
-			post { 
-                always { 
-                        junit 'target/surefire-reports/*.xml'
-                }
-            }
-
         }
 
-        stage('sonat test') {
-            agent { docker {
-               
-	image 'sonar-scanner2.8:latest'
-               
-	label 'master'
-               
-	args  '-v /root/.sonar/cache:/root/.sonar/cache:rw'
-            
-	} } 
-            steps {
-                echo 'Sonar qube'
-                sh "sonar-scanner"
-            }
-        }
-		stage('System Testing') {
-                        agent {label 'jenkinsslave111'}
-                                    steps {
-                                         system_testing(imagename, containername)
-                                    }
-                        }
 		stage ('Upload Artifacts') { 
-                            agent {label 'jenkinsslave111'}
+                            agent {label 'master'}
                     steps {
                              artifactory_upload(storagepath, buildnumber)
                 }
