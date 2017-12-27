@@ -33,42 +33,32 @@ buildnumber  = "${currentBuild.number}"
                 
                 sh 'ls -lrth' 
                 sh 'cd angularjavaapp; mvn clean install'
+                sh 'cp angularjavaapp/target/AngularJavaApp.war /opt/
             
 }
 
         }
 
-		stage ('Upload Artifacts') { 
-                            agent {label 'master'}
-                    steps {
-                             artifactory_upload(storagepath, buildnumber)
-                }
-    }
-
-stage('Download Artifacts'){
-    
-                      
-agent {label 'master'}
-               
-steps {
-                         
-	artifactory_download(storagepath, buildnumber)
-    
-}
-     
- }
        
    stage('deployment'){
                    
-	agent {label 'master'}
+	agent {
+           docker{
+              image 'tomcat:8.0.20-jre8'
+              label 'master'
+              args '-v /usr/local/tomcat/webapps:/usr/local/tomcat/webapps:rw -p 8080:8080'    
+}
+}
+
+steps{
+
+ sh 'cp /opt/AngularJavaApp.war /usr/local/tomcat/webapps/'
+
+
+}
+
                 
-	steps {
-                         
-	      sh 'ansible-playbook /home/skill_user/playbooks/app-deployment-test.yml --extra-vars "target=Adil_vm app_name=${Application} env_name=${Environment}"'
     
- }   
-       
-  }
 
 				
 
