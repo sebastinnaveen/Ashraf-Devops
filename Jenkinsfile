@@ -48,6 +48,17 @@ sh 'cp /var/lib/jenkins/workspace/jenkins.test@2/angularjavaapp/target/AngularJa
 
 }
 
+stage('build a docker image'){
+
+agent{ label 'master' }
+
+steps{
+sh 'cd /opt ; docker build -t malu/tomcat . '
+}
+
+}
+
+
 
 
        
@@ -56,7 +67,7 @@ sh 'cp /var/lib/jenkins/workspace/jenkins.test@2/angularjavaapp/target/AngularJa
 agent{ label 'master' }
 
 steps{
-sh 'docker run -it -v /opt:/usr/local/tomcat/webapps/:rw -p 8088:8080 -d tomcat:7-jre7'
+sh 'docker run -it  -p 8088:8080 -d malu/tomcat'
 }
 
                    
