@@ -19,7 +19,7 @@ buildnumber  = "${currentBuild.number}"
             
 	    docker {
                
-            image 'maven:3.5-jdk-8-alpine'
+            image 'maven'
                
 	    label 'master'
                
