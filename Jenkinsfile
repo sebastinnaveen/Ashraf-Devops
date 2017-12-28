@@ -43,7 +43,7 @@ stage('copy artifacts'){
 agent{ label 'master' }
 
 steps{
-sh 'cp /var/lib/jenkins/workspace/jenkins.test3@2/angularjavaapp/target/AngularJavaApp.war /usr/local/tomcat/webapps/AngularJavaApp.war'
+sh 'cp /var/lib/jenkins/workspace/jenkins.test@2/angularjavaapp/target/AngularJavaApp.war /opt/AngularJavaApp.war'
 }
 
 }
@@ -56,7 +56,7 @@ sh 'cp /var/lib/jenkins/workspace/jenkins.test3@2/angularjavaapp/target/AngularJ
 agent{ label 'master' }
 
 steps{
-sh 'docker run -it -v /usr/local/tomcat/webapps/:/usr/local/tomcat/webapps/:rw -p 8088:8080 -d tomcat:7-jre7'
+sh 'docker run -it -v /opt:/usr/local/tomcat/webapps/:rw -p 8088:8080 -d tomcat:7-jre7'
 }
 
                    
