@@ -32,7 +32,7 @@ buildnumber  = "${currentBuild.number}"
             steps {
                 
                 sh 'ls -lrth' 
-                sh 'cd angularjavaapp; mvn clean install'
+                sh 'cd angularjavaapp; mvn clean -e install'
             
 }
 
