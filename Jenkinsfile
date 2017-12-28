@@ -1,6 +1,17 @@
 #!groovy
 pipeline {
     agent {label 'master'}
+environment 
+{
+        
+imagename = 'adilashraf_10615395_img'
+        
+containername = 'adilashraf_10615395_con'
+        
+storagepath = "example-repo-local/adilashraf_10615395"      
+buildnumber  = "${currentBuild.number}"
+    
+}
     stages {
         stage('build') {
 
