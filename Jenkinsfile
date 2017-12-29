@@ -73,5 +73,16 @@ sh 'docker run -it  -p 8088:8080 -d malu/tomcat'
                    
 }
 
+stage('rbt post'){
+
+agent{ label 'master' }
+
+steps{
+sh 'cd /apps/opt/Asraf-Devops/; rbt post --tracking=master'
+}
+
+
+}
+
 }
 }
