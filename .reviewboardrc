@@ -1,3 +1,5 @@
 REVIEWBOARD_URL = 'http://localhost:8000/'
 REPOSITORY = 'ramproject'
+USERNAME = 'admin'
+PASSWORD = 'admin'
 
