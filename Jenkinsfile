@@ -89,7 +89,7 @@ stage('rbt post'){
 agent{ label 'master' }
 
 steps{
-sh 'cd /apps/opt/Asraf-Devops/; rbt post --tracking=master'
+sh 'cd /apps/opt/Ashraf-Devops; rbt post --tracking=master'
 }
 
 
