@@ -62,15 +62,26 @@ sh 'cd /opt ; docker build -t malu/tomcat . '
 
 
        
-   stage('deployment'){
+   stage('remove docker'){
 
 agent{ label 'master' }
 
 steps{
-sh 'docker run -it  -p 8088:8080 -d malu/tomcat'
+sh 'docker rm -f tomcatdev'
 }
 
                    
+}
+
+stage('deployment'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker run -it  -p 8088:8080 -d --name=tomcatdev malu/tomcat'
+}
+
+
 }
 
 stage('rbt post'){
