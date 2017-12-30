@@ -1,0 +1,30 @@
+#!groovy
+pipeline {
+    agent {label 'master'}
+    stages {
+
+stage('remove docker'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker rm -f tomcatqa'
+}
+
+                   
+}
+
+stage('deployment in qa'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker run -it  -p 8089:8080 -d --name=tomcatqa malu/tomcat'
+}
+
+
+}
+
+
+}
+}
