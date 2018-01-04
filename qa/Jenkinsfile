@@ -13,7 +13,7 @@ def notifySlack() {
         icon_url: jenkinsIcon
     ])
 
-    sh "curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}"
+    sh "curl -X POST --globoff --data-urlencode \'payload=${payload}\' ${slackURL}"
 }
 
 pipeline {
