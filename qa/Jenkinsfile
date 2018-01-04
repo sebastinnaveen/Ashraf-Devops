@@ -31,7 +31,7 @@ agent{ label 'master' }
 
 steps{
 
-sh "curl -X POST --data-urlencode 'payload={"channel": "#qa-approval","username": "webhookbot","text": "This is posted to #qa-approval and comes from a bot named webhookbot.<https://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!","icon_emoji": ":ghost:"}' https://hooks.slack.com/services/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"
+sh 'curl -X POST --data-urlencode 'payload={"channel": "#qa-approval","username": "webhookbot","text": "This is posted to #qa-approval and comes from a bot named webhookbot.<https://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!","icon_emoji": ":ghost:"}' https://hooks.slack.com/services/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'
 }
 
 
