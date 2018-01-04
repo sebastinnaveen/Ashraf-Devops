@@ -1,4 +1,5 @@
 #!groovy
+import groovy.json.JsonOutput
 pipeline {
     agent {label 'master'}
     stages {
@@ -32,10 +33,10 @@ agent{ label 'master' }
 steps{
 
 def slackURL = 'https://hooks.slack.com/services/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'
-def payload = JsonOutput.toJson([text      : This is posted to qa-approval and comes from a bot named webhookbot<http://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!,
-                                     channel   : qa-approval,
-                                     username  : "webhookbot",
-                                     icon_emoji: ":ghost:"])
+def payload = JsonOutput.toJson([text	: text,
+                                 channel   : qa-approval,
+                                 username  : "webhookbot",
+                                 icon_emoji: ":ghost:"])
 
 sh 'curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}'
 }
