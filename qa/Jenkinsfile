@@ -10,7 +10,7 @@ def notifySlack() {
     def payload = JsonOutput.toJson([text: "This is posted to #qa-approval and comes from a bot named webhookbot.<https://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!",
         channel: "qa-approval",
         username: "webhookbot",
-        icon_url: jenkinsIcon
+        icon_emoji: ":ghost:"
     ])
 
     sh "curl -X POST --globoff --data-urlencode \'payload=${payload}\' ${slackURL}"
