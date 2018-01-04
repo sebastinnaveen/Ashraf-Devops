@@ -4,7 +4,7 @@ import groovy.json.JsonOutput
 def slackNotificationChannel = '[#qa-approval]'     // ex: = "builds"
 
 def notifySlack() {
-    def slackURL = '[https://hooks.slack.com/services/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]'
+    def slackURL = 'https://hooks.slack.com/services/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'
     def jenkinsIcon = 'https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png'
 
     def payload = JsonOutput.toJson([text: "This is posted to #qa-approval and comes from a bot named webhookbot.<http://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!",
