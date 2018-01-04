@@ -45,10 +45,11 @@ sh 'docker run -it  -p 8089:8080 -d --name=tomcatqa malu/tomcat'
 stage('slack notification'){
 
 agent{ label 'master' }
+steps{
 
 notifySlack()
 
-
+}
 }
 
 
