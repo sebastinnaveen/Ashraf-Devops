@@ -1,21 +1,21 @@
 #!groovy
-environment 
+import groovy.json.JsonOutput
 
-{
-        
+def slackNotificationChannel = '[#qa-approval]'     // ex: = "builds"
 
-slackURL = 'https://hooks.slack.com/services/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'
-        
-payload = "channel": "qa-approval","username": "webhookbot","text": "This is posted to qa-approval and comes from a bot named webhookbot.<https://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!","icon_emoji": ":ghost:"
+def notifySlack() {
+    def slackURL = '[https://hooks.slack.com/services/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]'
+    def jenkinsIcon = 'https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png'
 
-        
+    def payload = JsonOutput.toJson([text: "This is posted to #qa-approval and comes from a bot named webhookbot.<https://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!",
+        channel: "qa-approval",
+        username: "webhookbot",
+        icon_url: jenkinsIcon
+    ])
 
-storagepath = "example-repo-local/adilashraf_10615395"      
-
-buildnumber  = "${currentBuild.number}"
-    
-
+    sh "curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}"
 }
+
 pipeline {
     agent {label 'master'}
     stages {
@@ -46,11 +46,7 @@ stage('slack notification'){
 
 agent{ label 'master' }
 
-steps{
-
-
-sh 'curl -X POST --data-urlencode \'payload=${payload}\' ${slackURL}'
-}
+notifySlack()
 
 
 }
