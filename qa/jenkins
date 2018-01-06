@@ -1,0 +1,42 @@
+#!groovy
+pipeline {
+    agent {label 'master'}
+    stages {
+
+stage('remove docker'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker rm -f tomcatqa'
+}
+
+                   
+}
+
+stage('deployment in qa'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker run -it  -p 8089:8080 -d --name=tomcatqa malu/tomcat'
+}
+
+
+}
+
+stage('slack notification'){
+
+agent{ label 'master' }
+
+steps{
+
+sh 'curl -X POST --data-urlencode 'payload={"channel": "#qa-approval","username": "webhookbot","text": "This is posted to #qa-approval and comes from a bot named webhookbot<http://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!"}' https://hooks.slack.com/services/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'
+}
+
+
+}
+
+
+}
+}

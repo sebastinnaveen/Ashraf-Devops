@@ -1,0 +1,57 @@
+#!groovy
+import groovy.json.JsonOutput
+
+def slackNotificationChannel = '[#qa-approval]'     // ex: = "builds"
+
+def notifySlack() {
+    def slackURL = 'https://hooks.slack.com/services/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'
+    def jenkinsIcon = 'https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png'
+
+    def payload = JsonOutput.toJson([text: "This is posted to #qa-approval and comes from a bot named webhookbot.<http://sizzlers-devops.dlinkddns.com:80/AngularJavaApp|Click here> for details!",
+        channel: "qa-approval",
+        username: "webhookbot",
+        icon_emoji: ":ghost:"
+    ])
+
+    sh "curl -X POST --globoff --data-urlencode \'payload=${payload}\' ${slackURL}"
+}
+
+pipeline {
+    agent {label 'master'}
+    stages {
+
+stage('remove docker'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker rm -f tomcatqa'
+}
+
+                   
+}
+
+stage('deployment in qa'){
+
+agent{ label 'master' }
+
+steps{
+sh 'docker run -it  -p 8089:8080 -d --name=tomcatqa malu/tomcat'
+}
+
+
+}
+
+stage('slack notification'){
+
+agent{ label 'master' }
+steps{
+
+notifySlack()
+
+}
+}
+
+
+}
+}
